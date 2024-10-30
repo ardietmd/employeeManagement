@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="row">
+        <div class="col-md-6 d-flex align-items-stretch grid-margin">
+            <div class="row flex-grow">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default form</h4>
+                            <p class="card-description">
+                                Basic form layout
+                            </p>
+                            <p class="h4 mb-4">Save Employee</p>
+		
+		                    <form action="#" th:action="@{/pages/save}"
+                                th:object="${employee}" method="POST">
+                            
+                                <input type="hidden" th:field="*{id}" />
+                                            
+                                <input type="text" th:field="*{name}"
+                                        class="form-control mb-4 col-4" placeholder="name">
+                                <input type="text" th:field="*{pendidikan}"
+                                        class="form-control mb-4 col-4" placeholder="pendidikan">	
+                                <input type="text" th:field="*{riwayatpekerjaan}"
+                                        class="form-control mb-4 col-4" placeholder="riwayat pekerjaaan">
+                                <input type="text" th:field="*{riwayatpelatihan}"
+                                        class="form-control mb-4 col-4" placeholder="riwayat pelatihan">
+                                <button type="submit" class="btn btn-info col-2">Save</button>	
+		                    </form>
+		                        
+		                        <!-- <a th:href="@{/employees/list}">Back to list</a> -->
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        
+    </div>
+
+
+</section>
+</body>
+</html>
