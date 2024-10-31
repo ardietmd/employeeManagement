@@ -3,7 +3,6 @@ package com.employeetest.employee.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,9 +38,11 @@ public class SpringSecurity {
                         .requestMatchers("/pages/table-users").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/pages/data-employee").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/pages/new-employee").hasRole("ADMIN")
-                        .requestMatchers("/pages/update-employee").hasRole("ADMIN")
+                        .requestMatchers("/pages/update-employee/**").hasRole("ADMIN")
                         .requestMatchers("/pages/save").hasRole("ADMIN")
+                        .requestMatchers("/pages/delete/**").hasRole("ADMIN")
                         .requestMatchers("/pages/delete").hasRole("ADMIN")
+                      
                   
 	
                 ).formLogin(

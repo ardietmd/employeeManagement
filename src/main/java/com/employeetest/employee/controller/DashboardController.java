@@ -3,9 +3,10 @@ package com.employeetest.employee.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.employeetest.employee.dto.UserDto;
 import com.employeetest.employee.entity.Employee;
+import com.employeetest.employee.entity.User;
 import com.employeetest.employee.service.EmployeeService;
 import com.employeetest.employee.service.UserService;
 
@@ -42,9 +42,22 @@ public class DashboardController {
     
 
     @GetMapping("/dashboard")
-    public String  mmDashboard() {
+    public String  dashboard() {
+        
         return "pages/dashboard";
     }
+
+    // @GetMapping("/")
+    // public String  mmDashboard(Model model) {
+
+    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //     String username = authentication.getName();
+
+    //     User user = userService.findUserByEmail(username);
+    //     model.addAttribute("user", user);
+
+    //     return "layout";
+    // }
 
     @GetMapping("/table-users")
     public String userTbale(Model model) {
@@ -98,11 +111,9 @@ public class DashboardController {
 		return "redirect:/pages/data-employee";
 	}
 
-    @GetMapping("/delete")
-	public String delete(@RequestParam("employeeId") int id) {
-		
-		employeeService.deleteEmployee(id);
-
-		return "redirect:/pages/data-employee";
-	}
+     @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/pages/data-employee";
+    }
 }
